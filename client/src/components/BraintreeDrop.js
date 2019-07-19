@@ -1,5 +1,5 @@
 import React, { useState, useEffect,  } from 'react';
-import { Dimmer, Loader, Segment, Header } from 'semantic-ui-react';
+import { Dimmer, Loader, Segment, } from 'semantic-ui-react';
 import braintree from 'braintree-web-drop-in';
 import BraintreeDropin from 'braintree-dropin-react';
 import BraintreeSubmitButton from './BraintreeSubmitButton';
@@ -13,7 +13,7 @@ const BraintreeDrop = (props) =>{
   const [transactionID, setTransactionID] = useState('')
 
   const handlePaymentMethod = (payload) =>{
-    
+
   }
       if(loaded){
         return(
