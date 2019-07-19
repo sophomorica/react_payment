@@ -19,7 +19,7 @@ const App = () => (
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
           <Route exact path='/payment_success' component={PaymentSuccess} />
-          <Route exact path='/payment_failer' component={PaymentFailure} />
+          <Route exact path='/payment_failure' component={PaymentFailure} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route component={NoMatch} />
