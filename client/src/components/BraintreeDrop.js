@@ -12,6 +12,15 @@ const BraintreeDrop = (props) =>{
   const [redirect, setRedirect] = useState(false)
   const [transactionID, setTransactionID] = useState('')
 
+  useEffect(()=>{
+    axios.get('/api/braintree_token')
+    .then(res =>{
+      const {data: token} = res.data
+      setToken(token)
+      setLoaded(true)
+    })
+  },[])
+
   const handlePaymentMethod = (payload) =>{
 
   }
