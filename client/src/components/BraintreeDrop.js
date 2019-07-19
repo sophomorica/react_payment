@@ -15,21 +15,23 @@ const BraintreeDrop = (props) =>{
   useEffect(()=>{
     axios.get('/api/braintree_token')
     .then(res =>{
-      const {data: token} = res.data
+      const {data: token }= res
       setToken(token)
       setLoaded(true)
     })
   },[])
 
   const handlePaymentMethod = (payload) =>{
+    debugger
 
   }
       if(loaded){
         return(
           <Segment>
+            {console.log(token)}
             <BraintreeDropin 
               braintree={braintree}
-              authorization={token}
+              authorizationToken={token}
               handlePaymentMethod={handlePaymentMethod}
               renderSubmitButton={BraintreeSubmitButton}
             />

@@ -3,7 +3,7 @@ import { Header, Segment, Input, Label, Divider, Image} from 'semantic-ui-react'
 import BriantreeDrop from './BraintreeDrop'
 const Home = (props) =>{
   const [amount, setAmount] = useState('')
-  const handleChange = e =>{
+  const handleChange = (e) =>{
     setAmount(e.target.value)
   }
   return (
