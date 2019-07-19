@@ -1,51 +1,42 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, } from 'react'
 import { Dimmer, Loader, Segment, } from 'semantic-ui-react';
 import braintree from 'braintree-web-drop-in';
 import BraintreeDropin from 'braintree-dropin-react';
 import BraintreeSubmitButton from './BraintreeSubmitButton';
-import {Redirect} from 'react-router-dom'
-import axios from 'axios'
-
-const BraintreeDrop = (props) =>{
+import { Redirect, } from "react-router-dom";
+import axios from 'axios';
+const BraintreeDrop = (props) => {
   const [loaded, setLoaded] = useState(false)
-  const [token, setToken] = useState("")
+  const [token, setToken] = useState('')
   const [redirect, setRedirect] = useState(false)
-  const [transactionID, setTransactionID] = useState('')
-
-  useEffect(()=>{
+  const [transactionId, setTransactionId] = useState('')
+  useEffect(() => {
     axios.get('/api/braintree_token')
-    .then(res =>{
-      const {data: token }= res
-      setToken(token)
-      setLoaded(true)
-    })
-  },[])
-
-  const handlePaymentMethod = (payload) =>{
+      .then( res => {
+        const { data: token, } = res
+        setToken(token)
+        setLoaded(true)
+      })
+  }, [])
+  const handlePaymentMethod = (payload) => {
     debugger
-
   }
-      if(loaded){
-        return(
-          <Segment>
-            {console.log(token)}
-            <BraintreeDropin 
-              braintree={braintree}
-              authorizationToken={token}
-              handlePaymentMethod={handlePaymentMethod}
-              renderSubmitButton={BraintreeSubmitButton}
-            />
-          </Segment>
-        )
-      }
-      else
-      return(
-        <Dimmer active>
-          <Loader>Loading Premium Payment Experience. Please wait...</Loader>
-        </Dimmer>
-      )
-
-  
- 
+  if (loaded)
+    return(
+      <Segment>
+        <BraintreeDropin
+          braintree={braintree}
+          authorizationToken={token}
+          handlePaymentMethod={handlePaymentMethod}
+          renderSubmitButton={BraintreeSubmitButton}
+        />
+      </Segment>
+    )
+  else
+    return(
+      <Dimmer active>
+        <Loader>Loading Premium Payment Experience. Please wait...</Loader>
+      </Dimmer>
+    )
 }
-export default BraintreeDrop
+export default BraintreeDrop;
