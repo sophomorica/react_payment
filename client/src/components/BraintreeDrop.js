@@ -5,11 +5,13 @@ import BraintreeDropin from 'braintree-dropin-react';
 import BraintreeSubmitButton from './BraintreeSubmitButton';
 import { Redirect, } from "react-router-dom";
 import axios from 'axios';
+
 const BraintreeDrop = (props) => {
   const [loaded, setLoaded] = useState(false)
   const [token, setToken] = useState('')
   const [redirect, setRedirect] = useState(false)
   const [transactionId, setTransactionId] = useState('')
+
   useEffect(() => {
     axios.get('/api/braintree_token')
       .then( res => {
@@ -19,7 +21,16 @@ const BraintreeDrop = (props) => {
       })
   }, [])
   const handlePaymentMethod = (payload) => {
-    debugger
+    const {amount} = props
+    axios.post('/api/payments', {amount, ...payload})
+    .then(res =>{
+      const {data: transactionId,} = res
+      setTransactionId(TransitionEvent)
+      setRedirect(true)
+    })
+    .catch(res =>{
+      window.location.reload()
+    })
   }
   if (loaded)
     return(
