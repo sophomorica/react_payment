@@ -22,16 +22,28 @@ const BraintreeDrop = (props) => {
   }, [])
   const handlePaymentMethod = (payload) => {
     const {amount} = props
-    axios.post('/api/payments', {amount, ...payload})
+    axios.post('/api/payment', {amount, ...payload})
     .then(res =>{
       const {data: transactionId,} = res
-      setTransactionId(TransitionEvent)
+      setTransactionId(transactionId)
       setRedirect(true)
     })
     .catch(res =>{
       window.location.reload()
     })
   }
+  if(redirect)
+  return(
+    <Redirect 
+    to={{
+      pathname: "/payment_success",
+      state: {
+        amount: props.amount,
+        transactionId,
+      }
+    }}
+    />
+  )
   if (loaded)
     return(
       <Segment>

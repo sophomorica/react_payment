@@ -4,7 +4,7 @@ class Api::BraintreeController < ApplicationController
   end
 
   def payment
-    result = Braintree::Transaction.sale(:amoutn => params[:amount], :payment_method_nonce => [:nonce], :options => {:submit_for_settlement => true})
+    result = Braintree::Transaction.sale(:amount => params[:amount], :payment_method_nonce => params[:nonce], :options => {:submit_for_settlement => true})
 
     if result.success?
       render json: result.transaction.id
@@ -13,7 +13,7 @@ class Api::BraintreeController < ApplicationController
       code = "code: #{result.transaction.processor_response_code}"
       render json: { errors: {text: text, code: code }}
     else
-      redner json: { errors: result.errors }
+      render json: { errors: result.errors }
     end
   end
 end
